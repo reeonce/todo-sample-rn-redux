@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, ListView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { AppRegistry, ListView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Todo from './Todo';
-// import { connect } from 'react-redux'
-//
-// @connect(state => ({
-//   todos: state.todos
-// }
-
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -20,6 +14,14 @@ export default class TodoList extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.todos !== this.props.todos) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRowsAndSections(nextProps.todos)
+      });
+    }
+  }
+
   _sectionHeaderHasChanged(oldSection, newSection) {
     return oldSection !== newSection;
   }
@@ -28,13 +30,20 @@ export default class TodoList extends Component {
     return oldRow !== newRow;
   }
 
+  _pressItem(rowData) {
+    var { onTodoClick } = this.props;
+    onTodoClick(rowData.id);
+  }
+
   _renderRow(rowData, sectionID, rowID) {
     console.log(rowData);
     return (
-      <View style={styles.row}>
-        <Todo todo={rowData}>
-        </Todo>
-      </View>
+      <TouchableOpacity onPress={() => this._pressItem(rowData)}>
+        <View style={styles.row, rowData.completed ? styles.completed : null}>
+          <Todo todo={rowData}>
+          </Todo>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -63,7 +72,7 @@ export default class TodoList extends Component {
         ref="listView"
         automaticallyAdjustContentInsets={false}
         dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
+        renderRow={this._renderRow.bind(this)}
         renderSectionHeader={this._renderSectionHeader}
         renderSeparator={this._renderSeparator}
       />
@@ -75,6 +84,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     padding: 15,
+    backgroundColor: 'red',
+  },
+  completed: {
+    backgroundColor: 'white',
   },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',

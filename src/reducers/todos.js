@@ -23,14 +23,23 @@ const todo = (state = {}, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ]
+      var added = state.added === undefined ? [todo(undefined, action)] :
+          [...state.added,  todo(undefined, action)];
+      return Object.assign({}, state, {
+        added: added
+      });
     case 'TOGGLE_TODO':
-      return state.map(t =>
-        todo(t, action)
-      )
+      var section;
+      for (var sec in state) {
+        state[sec].forEach(function(t) {
+          if (t.id === action.id) {
+            section = sec;
+          }
+        });
+      }
+      var newState = {};
+      newState[section] = state[section].map(t => todo(t, action));
+      return Object.assign({}, state, newState);
     default:
       return state
   }

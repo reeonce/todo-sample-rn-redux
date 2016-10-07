@@ -9,21 +9,9 @@ import {
   View
 } from 'react-native';
 
-import TodoList from './components/TodoList';
+import MainScene from '../containers/App'
 
 export default class TodoApp extends Component {
-  constructor(props) {
-    super(props);
-    let todos = {
-      today: [{ text: "cook dinner" }],
-      tomorrow: [{ text: "clean bathroom" }, { text: "clean bedroom" }]
-    };
-
-    this.state = {
-      todos: todos
-    };
-  }
-
   render() {
     return (
       <Navigator
@@ -32,7 +20,7 @@ export default class TodoApp extends Component {
         renderScene={(route, navigator) =>
           <View style={styles.container}>
             <StatusBar></StatusBar>
-            <TodoList todos={this.state.todos}></TodoList>
+            <MainScene />
           </View>
         }
         navigationBar={ <Navigator.NavigationBar routeMapper={NavigationBarRouteMapper} /> }
@@ -62,15 +50,7 @@ var NavigationBarRouteMapper = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#55FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    margin: 10,
-  },
-  instructions: {
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#0033CC',
   },
   navBar: {
     backgroundColor: 'white',
@@ -82,6 +62,7 @@ const styles = StyleSheet.create({
   navBarTitleText: {
     color: '#373E4D',
     fontWeight: '500',
-    marginVertical: 0,
+    marginVertical: 9,
+    textAlign: 'center',
   },
 });

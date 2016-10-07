@@ -2,14 +2,16 @@ import { connect } from 'react-redux'
 import { toggleTodo } from '../actions'
 import TodoList from '../components/TodoList'
 
-const getVisibleTodos = (todos, filter) => {
+const getVisibleTodos = (todos, filter='SHOW_ALL') => {
   switch (filter) {
-    case 'SHOW_ALL':
+    case 'showAll':
       return todos
-    case 'SHOW_COMPLETED':
-      return todos.filter(t => t.completed)
-    case 'SHOW_ACTIVE':
-      return todos.filter(t => !t.completed)
+    case 'showCompleted':
+      var fTodos = {};
+      for (var sec in todos) {
+        fTodos[sec] = todos[sec].filter(t => t.completed);
+      }
+      return fTodos; 
   }
 }
 
