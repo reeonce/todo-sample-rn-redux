@@ -24,9 +24,9 @@ export default class MainScene extends Component {
     var todos = this.props.todos;
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <AddTodo />
-        <VisibleTodoList />
+        <VisibleTodoList style={{flex: 1}} />
         <FilterLink />
       </View>
     );

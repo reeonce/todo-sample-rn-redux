@@ -39,7 +39,7 @@ export default class TodoList extends Component {
     console.log(rowData);
     return (
       <TouchableOpacity onPress={() => this._pressItem(rowData)}>
-        <View style={styles.row, rowData.completed ? styles.completed : null}>
+        <View style={styles.row}>
           <Todo todo={rowData}>
           </Todo>
         </View>
@@ -84,10 +84,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     padding: 15,
-    backgroundColor: 'red',
-  },
-  completed: {
-    backgroundColor: 'white',
   },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -98,23 +94,14 @@ const styles = StyleSheet.create({
     opacity: 0.0,
   },
   sectionHeader: {
-    backgroundColor: '#48D1CC'
+    backgroundColor: '#48D1CC',
+    height: 48,
   },
   sectionHeaderText: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 16,
     color: 'white',
-    paddingLeft: 10
-  },
-  thumb: {
-    width: 64,
-    height: 64,
-  },
-  text: {
-    fontFamily: 'AvenirNext-Medium',
-    fontSize: 16
-  },
-  boldText: {
-    fontFamily: 'AvenirNext-Bold',
+    paddingLeft: 10,
+    marginVertical: 10,
   },
 });

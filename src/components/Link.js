@@ -14,21 +14,22 @@ export default class Link extends Component {
 
   render() {
     var { filter } = this.props;
+    var text = filter === "showAll" ? "Show Completed" : "Show All";
     return (
       <TouchableHighlight
-        style={filter === "showAll" ? styles.off : styles.on}
+        style={styles.button}
         onPress={this._onPressButton.bind(this)}>
-        <Text>Show Completed</Text>
+        <Text>{text}</Text>
       </TouchableHighlight>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  off: {
-    backgroundColor: 'transparent',
-  },
-  on: {
-    backgroundColor: 'white',
+  button: {
+    backgroundColor: "orange",
+    height: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });

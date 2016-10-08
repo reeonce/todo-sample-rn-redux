@@ -4,6 +4,7 @@ import {
   View,
   Text,
   TextInput,
+  StyleSheet,
   TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux'
@@ -27,14 +28,14 @@ class AddForm extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.form}>
         <TextInput
-          style={{height: 40}}
+          style={styles.text}
           value={this.state.text}
           onChangeText={(text) => this.setState({text})}
         />
-      <TouchableHighlight onPress={this._onPressButton.bind(this)}>
-        <Text>Add</Text>
+        <TouchableHighlight style={styles.add} onPress={this._onPressButton.bind(this)}>
+          <Text style={styles.addText}>Add</Text>
         </TouchableHighlight>
       </View>
     );
@@ -57,6 +58,23 @@ class AddTodo extends Component {
 AddTodo.PropTypes = {
   onAddTodo: PropTypes.func.isRequired
 }
+
+const styles = StyleSheet.create({
+  form: {
+    height: 40,
+    flexDirection: 'row',
+  },
+  text: {
+    padding: 10,
+    flex: 1,
+  },
+  add: {
+    width: 60,
+    paddingRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 function mapStateToProps(state, ownProps) {
   return {};

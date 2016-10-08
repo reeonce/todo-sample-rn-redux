@@ -4,20 +4,25 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  View,
-} from 'react-native';
+ import React, { Component } from 'react';
+ import {
+   AppRegistry,
+ } from 'react-native';
+ import { Provider } from 'react-redux';
 
-import TodoApp from './src/TodoApp';
+ import TodoApp from './src/components/TodoApp';
+ import configureStore from './src/store/configureStore'
 
-class todo extends Component {
-  render() {
-    return (
-      <TodoApp />
-    );
-  }
-}
+ const store = configureStore();
 
-AppRegistry.registerComponent('todo', () => todo);
+ class todo extends Component {
+   render() {
+     return (
+       <Provider store={store}>
+         <TodoApp />
+       </Provider>
+     );
+   }
+ }
+
+ AppRegistry.registerComponent('todo', () => todo);

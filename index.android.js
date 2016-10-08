@@ -4,7 +4,6 @@
  * @flow
  */
 
-import { createStore } from 'redux';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -12,14 +11,9 @@ import {
 import { Provider } from 'react-redux';
 
 import TodoApp from './src/components/TodoApp';
-import reducers from './src/reducers';
+import configureStore from './src/store/configureStore'
 
-
-let todos = {
-  today: [{ text: "cook dinner", id: 1 }],
-  tomorrow: [{ text: "clean bathroom", id: 2 }, { text: "clean bedroom", id: 3 }]
-};
-const store = createStore(reducers, { todos: todos, visibilityFilter: "showAll"});
+const store = configureStore();
 
 class todo extends Component {
   render() {
